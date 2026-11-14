@@ -1,6 +1,6 @@
 # Docker / Apple Silicon
 
-此镜像提供天狐 PyQt6 主界面，使用 Xvfb + Openbox + x11vnc + noVNC，
+此镜像默认启动天狐 PyQt6 经典菜单启动器（`launcher.py`），使用 Xvfb + Openbox + x11vnc + noVNC，
 在浏览器中显示 Linux 桌面，不需要在 Mac 安装 XQuartz。
 基础镜像和 Debian PyQt6 包支持 ARM64 / AMD64；构建默认跟随主机架构。
 
@@ -9,8 +9,6 @@
 ```bash
 git clone https://github.com/stave888/tianhu-toolbox-v4.git
 cd tianhu-toolbox-v4
-# PR 合并前需要先切到包含 Dockerfile 的分支：
-git switch codex/docker-arm64-gui
 docker compose up -d --build
 ```
 
@@ -63,7 +61,7 @@ JVM 参数（例如 `-Xmx512m`）填“前置参数”，应用参数填“后�
 ## 更新已运行的版本
 
 ```bash
-git fetch https://github.com/stave888/tianhu-toolbox-v4.git codex/docker-arm64-gui
+git fetch https://github.com/stave888/tianhu-toolbox-v4.git master
 git switch --detach FETCH_HEAD
 docker compose up -d --build
 ```
@@ -89,3 +87,5 @@ docker compose run --rm --entrypoint python3 toolbox -m unittest discover -s tes
 依赖说明：https://packages.debian.org/bookworm/python3-pyqt6
 Java 镜像：https://adoptium.net/installation/containers
 显示方案：https://novnc.com/
+
+如需完整主窗口，可将 compose.yaml 的 command 改为 `["python3", "main.py"]`，然后执行 `docker compose up -d`。

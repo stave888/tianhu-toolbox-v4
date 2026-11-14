@@ -2,6 +2,7 @@ services:
   toolbox:
     build: .
     image: tianhu-toolbox:local
+    command: ["python3", "launcher.py"]
     ports:
       - "127.0.0.1:6080:6080"
     shm_size: "256mb"

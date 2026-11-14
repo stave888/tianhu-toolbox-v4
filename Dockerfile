@@ -36,4 +36,4 @@ EXPOSE 6080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s \
     CMD python3 -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:6080/vnc.html', timeout=3)" || exit 1
 ENTRYPOINT ["/usr/bin/tini", "--", "/app/docker/start.sh"]
-CMD ["python3", "main.py"]
+CMD ["python3", "launcher.py"]
